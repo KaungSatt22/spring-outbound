@@ -65,6 +65,7 @@ public class InsuredPerson extends BaseEntity {
     @Column(name = "NRC")
     private String NRC;
 
+
     @Column(name = "isChild")
     private boolean isChild;
 

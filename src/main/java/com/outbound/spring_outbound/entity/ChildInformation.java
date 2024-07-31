@@ -29,9 +29,10 @@ public class ChildInformation extends BaseEntity{
     @Column(name = "relationship")
     private String relationship;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "insuredPerson_id")
+    @OneToOne
+    @JoinColumn(name = "insured_person_id")
     private InsuredPerson insuredPerson;
+
 
     public int getId() {
         return id;
