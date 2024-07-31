@@ -76,14 +76,14 @@ public class InsuredPerson extends BaseEntity {
         JourneyTo = journeyTo;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH
     })
     @JoinColumn(name = "journey_to_id")
     private Country JourneyTo;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH
     })
