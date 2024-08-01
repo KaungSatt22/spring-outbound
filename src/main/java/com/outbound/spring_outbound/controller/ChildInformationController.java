@@ -1,5 +1,4 @@
 package com.outbound.spring_outbound.controller;
-
 import com.outbound.spring_outbound.entity.ChildInformation;
 import com.outbound.spring_outbound.service.ChildInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +22,4 @@ public class ChildInformationController {
         ChildInformation childInfo = childInformationService.saveChildInformation(childInformation);
         return ResponseEntity.ok("Created Child Information Successfully!");
     }
-
 }
