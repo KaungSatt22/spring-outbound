@@ -26,8 +26,8 @@ public class BeneficiaryInfomation extends BaseEntity{
     @Column(name = "contact_phone_no")
     private int contactPhoneNo;
 
-    @Column(name = "NRC")
-    private String NRC;
+    @Column(name = "nrc")
+    private String nrc;
 
     @Column(name = "email")
     private String email;
@@ -76,11 +76,11 @@ public class BeneficiaryInfomation extends BaseEntity{
     }
 
     public String getNrc() {
-        return NRC;
+        return nrc;
     }
 
-    public void setNrc(String NRC) {
-        this.NRC = NRC;
+    public void setNrc(String nrc) {
+        this.nrc = nrc;
     }
 
     public String getEmail() {

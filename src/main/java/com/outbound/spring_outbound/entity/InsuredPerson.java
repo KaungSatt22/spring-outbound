@@ -68,6 +68,14 @@ public class InsuredPerson extends BaseEntity {
     @Column(name = "isChild")
     private boolean isChild;
 
+    public Country getJourneyTo() {
+        return JourneyTo;
+    }
+
+    public void setJourneyTo(Country journeyTo) {
+        JourneyTo = journeyTo;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
             CascadeType.PERSIST, CascadeType.REFRESH
@@ -236,14 +244,6 @@ public class InsuredPerson extends BaseEntity {
 
     public void setChild(boolean child) {
         isChild = child;
-    }
-
-    public Country getJourneyTo() {
-        return JourneyTo;
-    }
-
-    public void setJourneyTo(Country journeyTo) {
-        JourneyTo = journeyTo;
     }
 
     public Country getCountryForDestination() {
