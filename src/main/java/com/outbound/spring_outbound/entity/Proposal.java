@@ -56,4 +56,107 @@ public class Proposal extends BaseEntity{
     @JoinColumn(name = "agent_id")
     private Agent agent;
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getCertificateNumber() {
+        return certificateNumber;
+    }
+
+    public void setCertificateNumber(String certificateNumber) {
+        this.certificateNumber = certificateNumber;
+    }
+
+    public int getCoveragePlan() {
+        return coveragePlan;
+    }
+
+    public void setCoveragePlan(int coveragePlan) {
+        this.coveragePlan = coveragePlan;
+    }
+
+    public double getRates() {
+        return rates;
+    }
+
+    public void setRates(double rates) {
+        this.rates = rates;
+    }
+
+    public LocalDate getEstimatedDepartureDate() {
+        return estimatedDepartureDate;
+    }
+
+    public void setEstimatedDepartureDate(LocalDate estimatedDepartureDate) {
+        this.estimatedDepartureDate = estimatedDepartureDate;
+    }
+
+    public LocalDate getPolicyStartDate() {
+        return policyStartDate;
+    }
+
+    public void setPolicyStartDate(LocalDate policyStartDate) {
+        this.policyStartDate = policyStartDate;
+    }
+
+    public LocalDate getPolicyEndDate() {
+        return policyEndDate;
+    }
+
+    public void setPolicyEndDate(LocalDate policyEndDate) {
+        this.policyEndDate = policyEndDate;
+    }
+
+    public LocalDate getSubmittedDate() {
+        return submittedDate;
+    }
+
+    public void setSubmittedDate(LocalDate submittedDate) {
+        this.submittedDate = submittedDate;
+    }
+
+    public double getServiceAmount() {
+        return serviceAmount;
+    }
+
+    public void setServiceAmount(double serviceAmount) {
+        this.serviceAmount = serviceAmount;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getPackages() {
+        return packages;
+    }
+
+    public void setPackages(int packages) {
+        this.packages = packages;
+    }
+
+    public InsuredPerson getInsuredPerson() {
+        return insuredPerson;
+    }
+
+    public void setInsuredPerson(InsuredPerson insuredPerson) {
+        this.insuredPerson = insuredPerson;
+    }
+
+    public Agent getAgent() {
+        return agent;
+    }
+
+    public void setAgent(Agent agent) {
+        this.agent = agent;
+    }
 }

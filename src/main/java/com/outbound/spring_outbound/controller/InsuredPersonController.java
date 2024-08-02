@@ -2,6 +2,7 @@ package com.outbound.spring_outbound.controller;
 import com.outbound.spring_outbound.entity.BeneficiaryInfomation;
 import com.outbound.spring_outbound.entity.ChildInformation;
 import com.outbound.spring_outbound.entity.InsuredPerson;
+import com.outbound.spring_outbound.entity.Proposal;
 import com.outbound.spring_outbound.service.InsuredPersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,8 @@ public class InsuredPersonController {
     }
 
     @PostMapping("/insured-person")
-    public ResponseEntity<?> createInsuredPerson(@ModelAttribute InsuredPerson insuredPerson, @ModelAttribute ChildInformation childInformation, @RequestParam int journeyToId, @RequestParam int destinationCountryId,@ModelAttribute BeneficiaryInfomation beneficiaryInfomation,@RequestParam boolean isChild){
-        insuredPersonService.createInsuredPerson(insuredPerson,childInformation,journeyToId,destinationCountryId,beneficiaryInfomation,isChild);
+    public ResponseEntity<?> createInsuredPerson(@ModelAttribute InsuredPerson insuredPerson, @ModelAttribute ChildInformation childInformation, @RequestParam int journeyToId, @RequestParam int destinationCountryId, @ModelAttribute BeneficiaryInfomation beneficiaryInfomation, @RequestParam boolean isChild, @ModelAttribute Proposal proposal){
+        insuredPersonService.createInsuredPerson(insuredPerson,childInformation,journeyToId,destinationCountryId,beneficiaryInfomation,isChild,proposal);
         return ResponseEntity.ok("Created Insured person successfully!");
     }
 }
