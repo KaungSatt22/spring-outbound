@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "insured-person")
+@Table(name = "insured_person")
 public class InsuredPerson extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,25 +56,14 @@ public class InsuredPerson extends BaseEntity {
     @Column(name = "passport_number")
     private String passportNumber;
 
-    @Column(name = "issued_country")
-    private String issuedCountry;
-
-    @Column(name = "issued_date")
-    private LocalDate issuedDate;
+    @Column(name = "passport_issued_date")
+    private LocalDate passportIssuedDate;
 
     @Column(name = "NRC")
     private String NRC;
 
     @Column(name = "isChild")
-    private boolean isChild;
-
-    public Country getJourneyTo() {
-        return JourneyTo;
-    }
-
-    public void setJourneyTo(Country journeyTo) {
-        JourneyTo = journeyTo;
-    }
+    private boolean forChild;
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {
             CascadeType.DETACH, CascadeType.MERGE,
@@ -89,6 +78,10 @@ public class InsuredPerson extends BaseEntity {
     })
     @JoinColumn(name = "destination_country_id")
     private Country countryForDestination;
+
+    @ManyToOne
+    @JoinColumn(name="passport_issued_country_id")
+    private Country passportIssuedCountry;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "beneficiary_id")
@@ -214,20 +207,12 @@ public class InsuredPerson extends BaseEntity {
         this.passportNumber = passportNumber;
     }
 
-    public String getIssuedCountry() {
-        return issuedCountry;
+    public LocalDate getPassportIssuedDate() {
+        return passportIssuedDate;
     }
 
-    public void setIssuedCountry(String issuedCountry) {
-        this.issuedCountry = issuedCountry;
-    }
-
-    public LocalDate getIssuedDate() {
-        return issuedDate;
-    }
-
-    public void setIssuedDate(LocalDate issuedDate) {
-        this.issuedDate = issuedDate;
+    public void setPassportIssuedDate(LocalDate passportIssuedDate) {
+        this.passportIssuedDate = passportIssuedDate;
     }
 
     public String getNRC() {
@@ -238,12 +223,20 @@ public class InsuredPerson extends BaseEntity {
         this.NRC = NRC;
     }
 
-    public boolean isChild() {
-        return isChild;
+    public boolean isForChild() {
+        return forChild;
     }
 
-    public void setChild(boolean child) {
-        isChild = child;
+    public void setForChild(boolean forChild) {
+        this.forChild = forChild;
+    }
+
+    public Country getJourneyTo() {
+        return JourneyTo;
+    }
+
+    public void setJourneyTo(Country journeyTo) {
+        JourneyTo = journeyTo;
     }
 
     public Country getCountryForDestination() {
@@ -252,6 +245,14 @@ public class InsuredPerson extends BaseEntity {
 
     public void setCountryForDestination(Country countryForDestination) {
         this.countryForDestination = countryForDestination;
+    }
+
+    public Country getPassportIssuedCountry() {
+        return passportIssuedCountry;
+    }
+
+    public void setPassportIssuedCountry(Country passportIssuedCountry) {
+        this.passportIssuedCountry = passportIssuedCountry;
     }
 
     public BeneficiaryInfomation getBeneficiaryInfomation() {

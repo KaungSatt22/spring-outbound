@@ -1,12 +1,10 @@
 package com.outbound.spring_outbound.service;
+import com.outbound.spring_outbound.dto.InsuredPersonRequestDTO;
 import com.outbound.spring_outbound.entity.BeneficiaryInfomation;
 import com.outbound.spring_outbound.entity.ChildInformation;
 import com.outbound.spring_outbound.entity.InsuredPerson;
 import com.outbound.spring_outbound.entity.Proposal;
-import com.outbound.spring_outbound.repository.ChildInformationRepository;
-import com.outbound.spring_outbound.repository.CountryRepository;
-import com.outbound.spring_outbound.repository.InsuredPersonRepository;
-import com.outbound.spring_outbound.repository.ProposalRepository;
+import com.outbound.spring_outbound.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,57 +22,61 @@ public class InsuredPersonServiceImpl implements InsuredPersonService{
 
     private ProposalRepository proposalRepository;
 
+    private AgentRepository agentRepository;
+
     @Autowired
-    public  InsuredPersonServiceImpl(InsuredPersonRepository insuredPersonRepository,CountryRepository countryRepository,ChildInformationRepository childInformationRepository,ProposalRepository proposalRepository){
+    public  InsuredPersonServiceImpl(InsuredPersonRepository insuredPersonRepository,CountryRepository countryRepository,ChildInformationRepository childInformationRepository,ProposalRepository proposalRepository,AgentRepository agentRepository){
         this.insuredPersonRepository = insuredPersonRepository;
         this.countryRepository = countryRepository;
         this.childInformationRepository = childInformationRepository;
         this.proposalRepository = proposalRepository;
+        this.agentRepository = agentRepository;
     }
 
     @Override
-    public void createInsuredPerson(InsuredPerson insuredPerson, ChildInformation childInformation, int journeyToId, int destinationCountryId,BeneficiaryInfomation beneficiaryInfomation,boolean isChild,Proposal proposal) {
+    public void createInsuredPerson(InsuredPersonRequestDTO insuredPersonRequestDTO) {
 
-        countryRepository.findById(journeyToId).ifPresent(insuredPerson::setJourneyTo);
+        countryRepository.findById(insuredPersonRequestDTO.getJourneyToId()).ifPresent(insuredPersonRequestDTO.getInsuredPerson()::setJourneyTo);
 
-        countryRepository.findById(destinationCountryId).ifPresent(insuredPerson::setCountryForDestination);
+        countryRepository.findById(insuredPersonRequestDTO.getDestinationCountryId()).ifPresent(insuredPersonRequestDTO.getInsuredPerson()::setCountryForDestination);
+
+        countryRepository.findById(insuredPersonRequestDTO.getPassportIssuedCountryId()).ifPresent(insuredPersonRequestDTO.getInsuredPerson()::setPassportIssuedCountry);
 
         BeneficiaryInfomation beneficiary = new BeneficiaryInfomation();
-        beneficiary.setName(beneficiaryInfomation.getName());
-        beneficiary.setDateOfBirth(beneficiaryInfomation.getDateOfBirth());
-        beneficiary.setRelationship(beneficiaryInfomation.getRelationship());
-        beneficiary.setContactPhoneNo(beneficiaryInfomation.getContactPhoneNo());
-        beneficiary.setNrc(beneficiaryInfomation.getNrc());
-        beneficiary.setEmail(beneficiaryInfomation.getEmail());
-        beneficiary.setAddress(beneficiaryInfomation.getAddress());
-        insuredPerson.setBeneficiaryInfomation(beneficiary);
-        insuredPerson.setChild(isChild);
-        insuredPersonRepository.save(insuredPerson);
-        if(isChild){
+        beneficiary.setName(insuredPersonRequestDTO.getBeneficiaryName());
+        beneficiary.setDateOfBirth(insuredPersonRequestDTO.getBeneficiaryDOB());
+        beneficiary.setRelationship(insuredPersonRequestDTO.getBeneficiaryInfomation().getRelationship());
+        beneficiary.setContactPhoneNo(insuredPersonRequestDTO.getBeneficiaryPhoneNo());
+        beneficiary.setNrc(insuredPersonRequestDTO.getBeneficiaryInfomation().getNrc());
+        beneficiary.setEmail(insuredPersonRequestDTO.getBeneficiaryInfomation().getEmail());
+        beneficiary.setAddress(insuredPersonRequestDTO.getBeneficiaryInfomation().getAddress());
+        insuredPersonRequestDTO.getInsuredPerson().setBeneficiaryInfomation(beneficiary);
+        insuredPersonRequestDTO.getInsuredPerson().setForChild(insuredPersonRequestDTO.getInsuredPerson().isForChild());
+        insuredPersonRepository.save(insuredPersonRequestDTO.getInsuredPerson());
+        if(insuredPersonRequestDTO.getInsuredPerson().isForChild()){
             ChildInformation childInfo = new ChildInformation();
-            childInfo.setChildName(childInformation.getChildName());
-            childInfo.setDateOfBirth(childInformation.getDateOfBirth());
-            childInfo.setGender(childInformation.getGender());
-            childInfo.setGuardianceName(childInformation.getGuardianceName());
-            childInfo.setRelationship(childInformation.getRelationship());
-            childInfo.setInsuredPerson(insuredPerson);
+            childInfo.setChildName(insuredPersonRequestDTO.getChildInformation().getChildName());
+            childInfo.setDateOfBirth(insuredPersonRequestDTO.getChildDOB());
+            childInfo.setGender(insuredPersonRequestDTO.getChildGender());
+            childInfo.setGuardianceName(insuredPersonRequestDTO.getChildInformation().getGuardianceName());
+            childInfo.setRelationship(insuredPersonRequestDTO.getChildRelationship());
+            childInfo.setInsuredPerson(insuredPersonRequestDTO.getInsuredPerson());
             childInformationRepository.save(childInfo);
         }
 
         Proposal pro = new Proposal();
-        pro.setCertificateNumber(proposal.getCertificateNumber());
-        pro.setCoveragePlan(proposal.getCoveragePlan());
-        pro.setRates(proposal.getRates());
-        pro.setEstimatedDepartureDate(proposal.getEstimatedDepartureDate());
-        pro.setPolicyStartDate(proposal.getPolicyStartDate());
-        pro.setPolicyEndDate(proposal.getPolicyStartDate().plusDays(proposal.getCoveragePlan()));
+        pro.setCertificateNumber(insuredPersonRequestDTO.getProposal().getCertificateNumber());
+        pro.setCoveragePlan(insuredPersonRequestDTO.getProposal().getCoveragePlan());
+        pro.setRates(insuredPersonRequestDTO.getProposal().getRates());
+        pro.setEstimatedDepartureDate(insuredPersonRequestDTO.getProposal().getEstimatedDepartureDate());
+        pro.setPolicyStartDate(insuredPersonRequestDTO.getProposal().getPolicyStartDate());
+        pro.setPolicyEndDate(insuredPersonRequestDTO.getProposal().getPolicyStartDate().plusDays(insuredPersonRequestDTO.getProposal().getCoveragePlan()));
         pro.setSubmittedDate(LocalDate.now());
-        pro.setServiceAmount(proposal.getServiceAmount());
-        pro.setAge(proposal.getAge());
-        pro.setPackages(proposal.getPackages());
-        pro.setInsuredPerson(proposal.getInsuredPerson());
-        pro.setAgent(proposal.getAgent());
-        pro.setInsuredPerson(insuredPerson);
+        pro.setServiceAmount(insuredPersonRequestDTO.getProposal().getServiceAmount());
+        pro.setAge(insuredPersonRequestDTO.getProposal().getAge());
+        pro.setPackages(insuredPersonRequestDTO.getProposal().getPackages());
+        agentRepository.findById(insuredPersonRequestDTO.getAgentId()).ifPresent(pro::setAgent);
+        pro.setInsuredPerson(insuredPersonRequestDTO.getInsuredPerson());
         proposalRepository.save(pro);
     }
 }
