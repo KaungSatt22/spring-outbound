@@ -24,7 +24,7 @@ public class BeneficiaryInfomation extends BaseEntity{
     private String relationship;
 
     @Column(name = "contact_phone_no")
-    private int contactPhoneNo;
+    private String contactPhoneNo;
 
     @Column(name = "nrc")
     private String nrc;
@@ -67,11 +67,11 @@ public class BeneficiaryInfomation extends BaseEntity{
         this.relationship = relationship;
     }
 
-    public int getContactPhoneNo() {
+    public String getContactPhoneNo() {
         return contactPhoneNo;
     }
 
-    public void setContactPhoneNo(int contactPhoneNo) {
+    public void setContactPhoneNo(String contactPhoneNo) {
         this.contactPhoneNo = contactPhoneNo;
     }
 

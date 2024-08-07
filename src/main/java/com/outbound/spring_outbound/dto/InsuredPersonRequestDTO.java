@@ -20,7 +20,7 @@ public class InsuredPersonRequestDTO {
     private int passportIssuedCountryId;
     private String beneficiaryName;
     private LocalDate beneficiaryDOB;
-    private int beneficiaryPhoneNo;
+    private String beneficiaryPhoneNo;
     private LocalDate childDOB;
     private String childGender;
     private String childRelationship;

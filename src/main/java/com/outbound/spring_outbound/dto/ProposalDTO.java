@@ -17,7 +17,7 @@ public class ProposalDTO {
 
     private String name;
 
-    private int contactPhone;
+    private String contactPhone;
 
     private int age;
 

@@ -27,10 +27,10 @@ public class InsuredPerson extends BaseEntity {
     private String journeyFrom = "Myanmar";
 
     @Column(name = "contact_phone_no")
-    private int contactPhoneNo;
+    private String contactPhoneNo;
 
     @Column(name = "foreign_contact_no")
-    private int foreignContactNo;
+    private String foreignContactNo;
 
     @Column(name = "father_name")
     private String fatherName;
@@ -127,19 +127,19 @@ public class InsuredPerson extends BaseEntity {
         this.journeyFrom = journeyFrom;
     }
 
-    public int getContactPhoneNo() {
+    public String getContactPhoneNo() {
         return contactPhoneNo;
     }
 
-    public void setContactPhoneNo(int contactPhoneNo) {
+    public void setContactPhoneNo(String contactPhoneNo) {
         this.contactPhoneNo = contactPhoneNo;
     }
 
-    public int getForeignContactNo() {
+    public String getForeignContactNo() {
         return foreignContactNo;
     }
 
-    public void setForeignContactNo(int foreignContactNo) {
+    public void setForeignContactNo(String foreignContactNo) {
         this.foreignContactNo = foreignContactNo;
     }
 
