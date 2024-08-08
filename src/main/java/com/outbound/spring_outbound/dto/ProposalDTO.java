@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class ProposalDTO {
     private String passportNumber;
 
-    private Integer passportIssuedCountry;
+    private int passportIssuedCountry;
 
     private String name;
 
@@ -28,5 +28,13 @@ public class ProposalDTO {
     private double rates;
 
     private LocalDate submittedDate;
+
+    private int packages;
+
+    private int destinationTo;
+
+    private boolean forChild;
+
+    private String agentName;
 
 }
