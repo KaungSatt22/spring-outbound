@@ -20,7 +20,7 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
 
     @Column(name = "version")
-    private double version;
+    private Double version;
 
     @PrePersist
     protected void onCreate() {
@@ -28,7 +28,7 @@ public class BaseEntity {
         updatedAt = LocalDateTime.now();
         createdUserId = 1;
         updatedUserId = 1;
-        version = 1;
+        version = 1.0;
     }
 
     @PreUpdate
@@ -68,11 +68,11 @@ public class BaseEntity {
         this.updatedAt = updatedAt;
     }
 
-    public double getVersion() {
+    public Double getVersion() {
         return version;
     }
 
-    public void setVersion(double version) {
+    public void setVersion(Double version) {
         this.version = version;
     }
 

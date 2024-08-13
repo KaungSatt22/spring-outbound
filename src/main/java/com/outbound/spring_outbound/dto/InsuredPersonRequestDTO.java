@@ -1,29 +1,60 @@
 package com.outbound.spring_outbound.dto;
 
-import com.outbound.spring_outbound.entity.BeneficiaryInfomation;
-import com.outbound.spring_outbound.entity.ChildInformation;
-import com.outbound.spring_outbound.entity.InsuredPerson;
-import com.outbound.spring_outbound.entity.Proposal;
 import lombok.Data;
-
 import java.time.LocalDate;
+
 
 @Data
 public class InsuredPersonRequestDTO {
 
-    private InsuredPerson insuredPerson;
-    private ChildInformation childInformation;
-    private BeneficiaryInfomation beneficiaryInfomation;
-    private Proposal proposal;
-    private int journeyToId;
-    private int destinationCountryId;
-    private int passportIssuedCountryId;
+    //InsuredPerson
+    private String passportNumber;
+    private LocalDate passportIssuedDate;
+    private String insuredPersonNRC;
+    private String insuredPersonName;
+    private LocalDate insuredPersonDOB;
+    private String insuredPersonGender;
+    private String insuredPersonContactPhoneNo;
+    private String foreignContactPhoneNo;
+    private String fatherName;
+    private String race;
+    private String occupation;
+    private String maritalStatus;
+    private String insuredPersonEmail;
+    private String addressInMyanmar;
+    private String addressAbroad;
+    private boolean forChild;
+    private int journeyTo;
+    private int countryForDestination;
+    private int passportIssuedCountry;
+
+    //Beneficiary
     private String beneficiaryName;
     private LocalDate beneficiaryDOB;
-    private String beneficiaryPhoneNo;
+    private String beneficiaryRelationship;
+    private String beneficiaryContactPhoneNo;
+    private String beneficiaryNRC;
+    private String beneficiaryEmail;
+    private String beneficiaryAddress;
+
+    //Child
+    private String childName;
     private LocalDate childDOB;
     private String childGender;
+    private String guardianceName;
     private String childRelationship;
+
+    //proposal
+    private String certificateNumber;
+    private int coveragePlan;
+    private double rates;
+    private LocalDate estimatedDepartureDate;
+    private LocalDate policyStartDate;
+    private double serviceAmount;
+    private int insuredPersonAge;
+    private int packages;
     private int agentId;
+
+
 
 }
