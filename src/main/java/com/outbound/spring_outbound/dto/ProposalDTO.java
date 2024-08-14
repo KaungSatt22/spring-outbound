@@ -1,12 +1,7 @@
 package com.outbound.spring_outbound.dto;
-
-
-import com.outbound.spring_outbound.entity.Agent;
-import com.outbound.spring_outbound.entity.ChildInformation;
 import lombok.*;
-
 import java.time.LocalDate;
-import java.util.Optional;
+
 
 @Getter
 @Setter
@@ -42,15 +37,17 @@ public class ProposalDTO {
 
     private boolean forChild;
 
-    private Optional<Agent> agent;
+    private String agentName;
 
-    private Optional<ChildInformation> childInformation;
+    private String childName;
+
+    private LocalDate childDOB;
 
     public ProposalDTO(){}
 
     public ProposalDTO(String passportNumber, int passportIssuedCountry, String name, String contactPhone,LocalDate DOB, int age,
                        String certificateNumber, int coveragePlan, double rates,LocalDate policyStartDate,LocalDate policyEndDate,  LocalDate submittedDate, int packages,
-                       int destinationTo, boolean forChild,Agent agent, ChildInformation childInformation) {
+                       int destinationTo, boolean forChild,String agentName,String childName,LocalDate childDOB) {
         this.passportNumber = passportNumber;
         this.passportIssuedCountry = passportIssuedCountry;
         this.name = name;
@@ -66,7 +63,8 @@ public class ProposalDTO {
         this.packages = packages;
         this.destinationTo = destinationTo;
         this.forChild = forChild;
-        this.agent = Optional.ofNullable(agent);
-        this.childInformation = Optional.ofNullable(childInformation);
+        this.agentName = agentName;
+        this.childName = childName;
+        this.childDOB = childDOB;
     }
 }

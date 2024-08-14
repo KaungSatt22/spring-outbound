@@ -7,6 +7,7 @@ import com.outbound.spring_outbound.entity.ChildInformation;
 import com.outbound.spring_outbound.entity.InsuredPerson;
 import com.outbound.spring_outbound.entity.Proposal;
 import com.outbound.spring_outbound.repository.*;
+import com.outbound.spring_outbound.ultil.GenerateCertificate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -84,7 +85,11 @@ public class ProposalServiceImpl implements ProposalService {
         }
 
         Proposal pro = new Proposal();
-        pro.setCertificateNumber(insuredPersonRequestDTO.getCertificateNumber());
+        int maxCertificateNumber = proposalRepository.findMaxCertificateNumber();
+        GenerateCertificate gc = new GenerateCertificate();
+        String certificate = gc.generateCertificateNumber(maxCertificateNumber);
+        pro.setCertificateNumber(certificate);
+        pro.setMaxValue(maxCertificateNumber+1);
         pro.setCoveragePlan(insuredPersonRequestDTO.getCoveragePlan());
         pro.setRates(insuredPersonRequestDTO.getRates());
         pro.setEstimatedDepartureDate(insuredPersonRequestDTO.getEstimatedDepartureDate());

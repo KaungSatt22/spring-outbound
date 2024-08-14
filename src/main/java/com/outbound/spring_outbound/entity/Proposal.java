@@ -45,6 +45,9 @@ public class Proposal extends BaseEntity{
     @Column(name = "packages")
     private int packages;
 
+    @Column(name = "max_value")
+    private int maxValue;
+
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "insuredPerson_id")
     private InsuredPerson insuredPerson;
@@ -53,6 +56,7 @@ public class Proposal extends BaseEntity{
             CascadeType.DETACH,  CascadeType.MERGE,
             CascadeType.PERSIST,CascadeType.REFRESH
     })
+
     @JoinColumn(name = "agent_id")
     private Agent agent;
 
@@ -158,5 +162,13 @@ public class Proposal extends BaseEntity{
 
     public void setAgent(Agent agent) {
         this.agent = agent;
+    }
+
+    public int getMaxValue() {
+        return maxValue;
+    }
+
+    public void setMaxValue(int maxValue) {
+        this.maxValue = maxValue;
     }
 }
