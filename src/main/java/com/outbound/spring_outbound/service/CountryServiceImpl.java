@@ -13,11 +13,6 @@ public class CountryServiceImpl implements CountryService {
     private CountryRepository countryRepository;
 
     @Override
-    public Country createCountry(Country country) {
-        return countryRepository.save(country);
-    }
-
-    @Override
     public List<Country> findAllCountry() {
         return countryRepository.findAll();
     }
